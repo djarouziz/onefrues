@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقارنة فواكه الشيطان - ون بيس</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <!-- Language Toggle -->
+            <div class="language-toggle">
+                <button id="languageToggle" class="language-btn">
+                    <span class="lang-icon">🌐</span>
+                    <span id="langText">English</span>
+                </button>
+            </div>
+            
+            <h1 class="main-title" id="mainTitle">⚔️ مقارنة فواكه الشيطان ⚔️</h1>
+            <p class="subtitle" id="subtitle">اكتشف قوة فواكه الشيطان في عالم ون بيس</p>
+            
+            <!-- Search and Filters -->
+            <div class="search-section">
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن فاكهة الشيطان...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all" id="filterAll">الكل</button>
+                    <button class="filter-btn" data-filter="Paramecia" id="filterParamecia">باراميسيا</button>
+                    <button class="filter-btn" data-filter="Logia" id="filterLogia">لوجيا</button>
+                    <button class="filter-btn" data-filter="Zoan" id="filterZoan">زون</button>
+                </div>
+            </div>
+            
+            <!-- Comparison Counter -->
+            <div id="comparisonCounter" class="comparison-counter hidden">
+                <span class="counter-text" id="counterText">الفواكه المحددة للمقارنة: <span id="counterNumber">0</span></span>
+                <button id="compareBtn" class="btn btn--primary">مقارنة الفواكه</button>
+                <button id="resetBtn" class="btn btn--secondary">إعادة تعيين</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Fruits Grid -->
+            <div id="fruitsGrid" class="fruits-grid">
+                <!-- Fruits will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Fruit Detail Modal -->
+    <div id="fruitModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body">
+                <div class="fruit-header">
+                    <div class="fruit-icon" id="modalFruitIcon">🍎</div>
+                    <h2 id="modalFruitName" class="fruit-name"></h2>
+                    <p id="modalFruitUser" class="fruit-user"></p>
+                    <span id="modalFruitType" class="fruit-type-badge"></span>
+                </div>
+                
+                <div class="fruit-details">
+                    <div class="detail-section">
+                        <h3 id="descriptionTitle">الوصف</h3>
+                        <p id="modalFruitDescription"></p>
+                    </div>
+                    
+                    <div class="stats-section">
+                        <h3 id="statsTitle">الإحصائيات</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label" id="attackLabel">القوة الهجومية</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" id="attackStat"></div>
+                                    <span class="stat-value" id="attackValue"></span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label" id="defenseLabel">الدفاع</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" id="defenseStat"></div>
+                                    <span class="stat-value" id="defenseValue"></span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label" id="tacticalLabel">الاستعمال التكتيكي</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" id="tacticalStat"></div>
+                                    <span class="stat-value" id="tacticalValue"></span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label" id="rarityLabel">الندرة</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" id="rarityStat"></div>
+                                    <span class="stat-value" id="rarityValue"></span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label" id="combatLabel">التأثير في القتال</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" id="combatStat"></div>
+                                    <span class="stat-value" id="combatValue"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="strengths-weaknesses">
+                        <div class="strengths-section">
+                            <h3 id="strengthsTitle">✅ نقاط القوة</h3>
+                            <ul id="modalStrengths"></ul>
+                        </div>
+                        <div class="weaknesses-section">
+                            <h3 id="weaknessesTitle">❌ نقاط الضعف</h3>
+                            <ul id="modalWeaknesses"></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button id="addToCompareBtn" class="btn btn--primary">إضافة للمقارنة</button>
+                    <button class="btn btn--secondary modal-close-btn" id="closeBtn">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Modal -->
+    <div id="comparisonModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content comparison-modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body">
+                <h2 class="comparison-title" id="comparisonTitle">🆚 مقارنة فواكه الشيطان</h2>
+                
+                <div id="comparisonTable" class="comparison-table">
+                    <!-- Comparison table will be populated by JavaScript -->
+                </div>
+                
+                <div id="comparisonResult" class="comparison-result">
+                    <!-- Result will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Elements -->
+    <div class="ocean-bg"></div>
+    <div class="waves"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
